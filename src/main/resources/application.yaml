@@ -1,0 +1,37 @@
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: book
+          uri: http://localhost:8081
+          predicates:
+            - Path=/book/**
+        - id: delivery
+          uri: http://localhost:8081
+          predicates:
+            - Path=/delivery/**
+        - id: rental
+          uri: http://localhost:8082
+          predicates:
+            - Path=/rental/**
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: book
+          uri: http://10.0.47.131:8080
+          predicates:
+            - Path=/book/**
+        - id: delivery
+          uri: http://10.0.47.131:8080
+          predicates:
+            - Path=/delivery/**
+        - id: rental
+          uri: http://10.0.60.164:8080
+          predicates:
+            - Path=/rental/**
